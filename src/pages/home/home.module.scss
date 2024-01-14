@@ -1,0 +1,93 @@
+.home {
+  height: 100%;
+  //   border: 1px solid red;
+
+  .container {
+    // border: 1px solid green;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .top {
+      //   border: 1px solid yellow;
+
+      .grid {
+        // border: 1px solid violet;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 3rem;
+
+        .card {
+          padding: 2rem;
+          background: #fff;
+          border-radius: 1rem;
+
+          &-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+
+            &-left {
+              .icon {
+                width: 6rem;
+                height: 6rem;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                svg {
+                  width: 50%;
+                  height: 50%;
+                }
+              }
+
+              .freelancer {
+                background: #e0fdff;
+
+                svg {
+                  fill: #00adb5;
+                  stroke: #00adb5;
+                }
+              }
+
+              .organization {
+                background: #fef7e5;
+
+                svg {
+                  fill: #fca311;
+                  stroke: #fef7e5;
+                }
+              }
+            }
+
+            &-right {
+              display: flex;
+              flex-direction: column;
+
+              .title {
+                font-size: 1.2rem;
+                color: #222831;
+              }
+
+              .count {
+                font-size: 3rem;
+                font-weight: bolder;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .bottom {
+      background: white;
+      padding: 1rem;
+      background: #fff;
+      border-radius: 1rem;
+      color: gray;
+    }
+  }
+}
