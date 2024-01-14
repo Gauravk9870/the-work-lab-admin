@@ -3,14 +3,14 @@ import axios from "axios";
 import { useTable } from "react-table";
 import Styles from "./organization.module.scss";
 
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 const Organization = () => {
   const [organizationData, setOrganizationData] = useState([]);
   useEffect(() => {
     const fetchOrganizationData = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:3000/api/organization/"
-        );
+        const response = await axios.get(`${BASE_URL}/api/organization/`);
         setOrganizationData(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);

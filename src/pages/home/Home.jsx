@@ -3,21 +3,21 @@ import Styles from "./home.module.scss";
 import axios from "axios";
 import UserRegistrationChart from "../../components/UserRegistrationChart";
 
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 const Home = () => {
   const [freelancerData, setFreelancerData] = React.useState([]);
   const [organizationData, setOrganizationData] = React.useState([]);
 
   React.useEffect(() => {
     const fetchFreelancerData = async () => {
-      const response = await axios.get("http://localhost:3000/api/freelancer/");
+      const response = await axios.get(`${BASE_URL}/api/freelancer/`);
       console.log(response.data);
       setFreelancerData(response.data);
     };
 
     const fetchOrganizationData = async () => {
-      const response = await axios.get(
-        "http://localhost:3000/api/organization/"
-      );
+      const response = await axios.get(`${BASE_URL}/api/organization/`);
       console.log(response.data);
       setOrganizationData(response.data);
     };

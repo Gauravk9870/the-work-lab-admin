@@ -3,15 +3,15 @@ import axios from "axios";
 import { useTable } from "react-table";
 import Styles from "./freelancers.module.scss";
 
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 const Freelancers = () => {
   const [freelancerData, setFreelancerData] = useState([]);
 
   useEffect(() => {
     const fetchFreelancerData = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:3000/api/freelancer/"
-        );
+        const response = await axios.get(`${BASE_URL}/api/freelancer/`);
         setFreelancerData(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
