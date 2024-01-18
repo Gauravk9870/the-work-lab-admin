@@ -8,15 +8,23 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
 const Freelancers = () => {
   const [freelancerData, setFreelancerData] = useState([]);
 
-  useEffect(() => {
-    const fetchFreelancerData = async () => {
-      try {
-        const response = await axios.get(`${BASE_URL}/api/freelancer/`);
+
+
+
+  const fetchFreelancerData = async () => {
+    try {
+      const response = await axios.get(`${BASE_URL}/api/freelancer/`);
+
+      if (response.status == 200)
         setFreelancerData(response.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
+
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+
+  useEffect(() => {
 
     fetchFreelancerData();
   }, []);
