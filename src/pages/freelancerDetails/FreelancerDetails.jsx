@@ -8,6 +8,7 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
 const FreelancerDetails = () => {
   const [freelancerData, setFreelancerData] = useState({});
   const { freelancerId } = useParams();
+  const [expertise, setExpertise] = useState([]);
 
   useEffect(() => {
     const fetchFreelancerData = async () => {
@@ -18,7 +19,9 @@ const FreelancerDetails = () => {
 
         if (response.status === 200) {
           console.log(response.data);
+
           setFreelancerData(response.data);
+          setExpertise(response.data.expertise.split(","));
         } else {
           console.error("Failed to fetch freelancer data");
         }
@@ -109,7 +112,7 @@ const FreelancerDetails = () => {
           <div className={styles[`item`]}>
             <h6>Area of Expertise</h6>
             <ul>
-              {freelancerData.expertise.map((expertise, index) => (
+              {expertise.map((expertise, index) => (
                 <li key={index}>{expertise}</li>
               ))}
             </ul>
