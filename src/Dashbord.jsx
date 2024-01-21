@@ -8,6 +8,7 @@ import Home from "./pages/home/Home";
 import Settings from "./pages/settings/Settings";
 import Logo from "./assets/logo.png";
 import { useAuth } from "./context/AuthContext";
+import FreelancerDetails from "./pages/freelancerDetails/FreelancerDetails";
 
 function Dashbo() {
   const { authenticated } = useAuth();
@@ -51,6 +52,11 @@ function Dashbo() {
             <Route path="/freelancers" element={<Freelancers />} />
             <Route path="/organizations" element={<Organization />} />
             <Route path="/settings" element={<Settings />} />
+
+            <Route
+              path="/freelancers/:freelancerId"
+              element={<FreelancerDetails />}
+            />
           </Routes>
         </div>
       </div>

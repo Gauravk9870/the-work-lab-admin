@@ -2,30 +2,25 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useTable } from "react-table";
 import Styles from "./freelancers.module.scss";
+import { Link, useNavigate } from "react-router-dom";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const Freelancers = () => {
   const [freelancerData, setFreelancerData] = useState([]);
-
-
-
+  const navigate = useNavigate();
 
   const fetchFreelancerData = async () => {
     try {
       const response = await axios.get(`${BASE_URL}/api/freelancer/`);
 
-      if (response.status == 200)
-        setFreelancerData(response.data);
-
+      if (response.status == 200) setFreelancerData(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
 
-
   useEffect(() => {
-
     fetchFreelancerData();
   }, []);
 
@@ -73,6 +68,10 @@ const Freelancers = () => {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data: freelancerData });
 
+  const handleRowClick = (freelancerId) => {
+    navigate(`${freelancerId}`);
+  };
+
   return (
     <div className={Styles.tableContainer}>
       <h1>Freelancers</h1>
@@ -90,7 +89,10 @@ const Freelancers = () => {
           {rows.map((row) => {
             prepareRow(row);
             return (
-              <tr {...row.getRowProps()}>
+              <tr
+                {...row.getRowProps()}
+                onClick={() => handleRowClick(row.original._id)}
+              >
                 {row.cells.map((cell) => (
                   <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
                 ))}
