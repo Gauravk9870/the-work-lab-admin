@@ -3,20 +3,27 @@ import axios from "axios";
 import { useTable } from "react-table";
 import Styles from "./freelancers.module.scss";
 import { Link, useNavigate } from "react-router-dom";
+import Loading from "../../components/loading/Loading";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const Freelancers = () => {
   const [freelancerData, setFreelancerData] = useState([]);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const fetchFreelancerData = async () => {
     try {
+      setLoading(true);
       const response = await axios.get(`${BASE_URL}/api/freelancer/`);
 
-      if (response.status == 200) setFreelancerData(response.data);
+      if (response.status == 200) {
+        setLoading(false);
+        setFreelancerData(response.data);
+      }
     } catch (error) {
       console.error("Error fetching data:", error);
+      setLoading(false);
     }
   };
 
@@ -73,35 +80,41 @@ const Freelancers = () => {
   };
 
   return (
-    <div className={Styles.tableContainer}>
-      <h1>Freelancers</h1>
-      <table {...getTableProps()} className={Styles.customTable}>
-        <thead>
-          {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column) => (
-                <th {...column.getHeaderProps()}>{column.render("Header")}</th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {rows.map((row) => {
-            prepareRow(row);
-            return (
-              <tr
-                {...row.getRowProps()}
-                onClick={() => handleRowClick(row.original._id)}
-              >
-                {row.cells.map((cell) => (
-                  <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+    <>
+      <div className={Styles.tableContainer}>
+        <h1>Freelancers</h1>
+        <table {...getTableProps()} className={Styles.customTable}>
+          <thead>
+            {headerGroups.map((headerGroup) => (
+              <tr {...headerGroup.getHeaderGroupProps()}>
+                {headerGroup.headers.map((column) => (
+                  <th {...column.getHeaderProps()}>
+                    {column.render("Header")}
+                  </th>
                 ))}
               </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </div>
+            ))}
+          </thead>
+          <tbody {...getTableBodyProps()}>
+            {rows.map((row) => {
+              prepareRow(row);
+              return (
+                <tr
+                  {...row.getRowProps()}
+                  onClick={() => handleRowClick(row.original._id)}
+                >
+                  {row.cells.map((cell) => (
+                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                  ))}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+
+      {loading && <Loading message="Fetching Data..." />}
+    </>
   );
 };
 
