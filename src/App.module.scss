@@ -31,6 +31,11 @@
           }
         }
         .bottom {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          height: 100%;
+
           ul {
             display: flex;
             flex-direction: column;
@@ -45,6 +50,18 @@
 
               &:hover {
                 background-color: whitesmoke;
+              }
+            }
+
+            .logout {
+              button {
+                border: none;
+                padding: 1rem 1.5rem;
+                cursor: pointer;
+                background: #079ec4;
+                color: #fff;
+                font-size: 1.4rem;
+                border-radius: 1rem;
               }
             }
           }

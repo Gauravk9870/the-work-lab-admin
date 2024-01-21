@@ -12,7 +12,7 @@ import FreelancerDetails from "./pages/freelancerDetails/FreelancerDetails";
 import OrganizationDetails from "./pages/ogranizationDetails/OrganizationDetails";
 
 function Dashbo() {
-  const { authenticated } = useAuth();
+  const { authenticated, logout } = useAuth();
 
   // Redirect to login if not authenticated
   if (!authenticated) {
@@ -40,9 +40,12 @@ function Dashbo() {
                 <Link to={"/dashboard/organizations"}>
                   <li>Organizations</li>
                 </Link>
-                <Link to={"/dashboard/settings"}>
-                  <li>Settings</li>
-                </Link>
+              </ul>
+
+              <ul>
+                <li className={styles.logout}>
+                  <button onClick={logout}>Logout</button>
+                </li>
               </ul>
             </nav>
           </div>
