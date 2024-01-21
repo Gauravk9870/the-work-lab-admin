@@ -12,27 +12,10 @@
     .top {
       display: flex;
       //   align-items: flex-start;
-      justify-content: space-between;
       gap: 2rem;
+      flex-direction: column;
 
       .left {
-        width: 20rem;
-        height: 20rem;
-
-        .profile {
-          gap: 2rem;
-          width: 100%;
-          height: 100%;
-          //   border-radius: 50%;
-          overflow: hidden;
-
-          img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-          }
-        }
-
         .resume {
           button {
             width: 100%;
@@ -137,7 +120,6 @@
           }
         }
       }
-
     }
   }
 }

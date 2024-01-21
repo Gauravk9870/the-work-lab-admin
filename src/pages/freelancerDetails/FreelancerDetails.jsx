@@ -49,20 +49,6 @@ const FreelancerDetails = () => {
       <div className={styles.freelancerDetails}>
         <div className={styles.container}>
           <div className={styles.top}>
-            <div className={styles.left}>
-              <div className={styles.profile}>
-                <img
-                  src="https://avatars.githubusercontent.com/u/78679960?v=4"
-                  alt=""
-                />
-              </div>
-
-              <div className={styles.resume}>
-                <button onClick={() => downloadResume(freelancerData?.resume)}>
-                  Download Resume
-                </button>
-              </div>
-            </div>
             <div className={styles.right}>
               <div className={styles.name}>
                 <h1>
@@ -77,10 +63,15 @@ const FreelancerDetails = () => {
                     <p>{freelancerData?.email}</p>
                   </div>
 
-                  {/* <div className={styles.item}>
-                    <h6>Phone Number</h6>
-                    <p>+91 9871311597</p>
-                  </div> */}
+                  <div className={styles.item}>
+                    <h6>Member since</h6>
+                    <p>
+                      {new Date(freelancerData.createdAt).toLocaleDateString(
+                        "en-US",
+                        { month: "long", day: "numeric", year: "numeric" }
+                      )}
+                    </p>{" "}
+                  </div>
                 </div>
 
                 <div className={styles.location}>
@@ -110,10 +101,18 @@ const FreelancerDetails = () => {
                 </div>
               </div>
             </div>
+
+            <div className={styles.left}>
+              <div className={styles.resume}>
+                <button onClick={() => downloadResume(freelancerData?.resume)}>
+                  Download Resume
+                </button>
+              </div>
+            </div>
           </div>
 
           <div className={styles.bottom}>
-            <div className={styles[`item`]}>
+            {/* <div className={styles[`item`]}>
               <h6>Member since</h6>
               <p>
                 {new Date(freelancerData.createdAt).toLocaleDateString(
@@ -121,7 +120,7 @@ const FreelancerDetails = () => {
                   { month: "long", day: "numeric", year: "numeric" }
                 )}
               </p>{" "}
-            </div>
+            </div> */}
 
             <div className={styles[`item`]}>
               <h6>Bio</h6>
