@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useTable } from "react-table";
+import { Link, useNavigate } from "react-router-dom";
 import Styles from "./organization.module.scss";
 import Loading from "../../components/loading/Loading";
 
@@ -9,6 +10,7 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
 const Organization = () => {
   const [organizationData, setOrganizationData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchOrganizationData = async () => {
@@ -61,6 +63,10 @@ const Organization = () => {
       columns,
       data: organizationData,
     });
+
+  const handleRowClick = (organizationsId) => {
+    navigate(`${organizationsId}`);
+  };
   return (
     <>
       <div className={Styles.tableContainer}>
@@ -81,7 +87,10 @@ const Organization = () => {
             {rows.map((row) => {
               prepareRow(row);
               return (
-                <tr {...row.getRowProps()}>
+                <tr
+                  {...row.getRowProps()}
+                  onClick={() => handleRowClick(row.original.GSTIN)}
+                >
                   {row.cells.map((cell) => (
                     <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
                   ))}
