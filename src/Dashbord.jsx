@@ -1,14 +1,22 @@
 import { useState } from "react";
 
 import styles from "./App.module.scss";
-import { Link, Route, Routes } from "react-router-dom";
+import { Link, Navigate, Route, Routes } from "react-router-dom";
 import Freelancers from "./pages/freelancers/Freelancers";
 import Organization from "./pages/organization/Organization";
 import Home from "./pages/home/Home";
 import Settings from "./pages/settings/Settings";
 import Logo from "./assets/logo.png";
+import { useAuth } from "./context/AuthContext";
 
 function Dashbo() {
+  const { authenticated } = useAuth();
+
+  // Redirect to login if not authenticated
+  if (!authenticated) {
+    return <Navigate to="/" />;
+  }
+
   return (
     <div className={styles.admin}>
       <div className={styles.container}>
